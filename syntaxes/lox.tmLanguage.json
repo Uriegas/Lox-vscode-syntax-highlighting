@@ -1,8 +1,6 @@
 {
 	"information_for_contributors": [
-		"Contribute at: https://github.com/Uriegas/Lox-Vscode-extension",
-		"If you want to provide a fix or improvement, please create a pull request against the original repository.",
-		"Once accepted there, we are happy to receive an update request."
+		"Contribute at: https://github.com/Uriegas/Lox-Vscode-extension"
 	],
 	"name": "Lox",
 	"scopeName": "source.lox",
