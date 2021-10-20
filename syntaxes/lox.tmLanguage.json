@@ -6,48 +6,13 @@
 	"scopeName": "source.lox",
 	"patterns": [
 		{
-			"name": "meta.preprocessor.script.dart",
-			"match": "^(#!.*)$"
-		},
-		{
-			"name": "meta.declaration.dart",
-			"begin": "^\\w*\\b(library|import|part of|part|export)\\b",
-			"beginCaptures": {
-				"0": {
-					"name": "keyword.other.import.dart"
-				}
-			},
-			"end": ";",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.terminator.dart"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#strings"
-				},
-				{
-					"include": "#comments"
-				},
-				{
-					"name": "keyword.other.import.dart",
-					"match": "\\b(as|show|hide)\\b"
-				},
-				{
-					"name": "keyword.control.dart",
-					"match": "\\b(if)\\b"
-				}
-			]
-		},
-		{
 			"include": "#comments"
 		},
 		{
-			"include": "#punctuation"
+			"includ": "#digits"
 		},
 		{
-			"include": "#annotations"
+			"include": "#punctuation"
 		},
 		{
 			"include": "#keywords"
@@ -60,150 +25,61 @@
 		}
 	],
 	"repository": {
-		"dartdoc": {
-			"patterns": [
-				{
-					"match": "(\\[.*?\\])",
-					"captures": {
-						"0": {
-							"name": "variable.name.source.dart"
-						}
-					}
-				},
-				{
-					"match": "^ {4,}(?![ \\*]).*",
-					"captures": {
-						"0": {
-							"name": "variable.name.source.dart"
-						}
-					}
-				},
-				{
-					"contentName": "variable.other.source.dart",
-					"begin": "```.*?$",
-					"end": "```"
-				},
-				{
-					"match": "(`.*?`)",
-					"captures": {
-						"0": {
-							"name": "variable.other.source.dart"
-						}
-					}
-				},
-				{
-					"match": "(`.*?`)",
-					"captures": {
-						"0": {
-							"name": "variable.other.source.dart"
-						}
-					}
-				},
-				{
-					"match": "(\\* ((    ).*))$",
-					"captures": {
-						"2": {
-							"name": "variable.other.source.dart"
-						}
-					}
-				},
-				{
-					"match": "(\\*    .*)$"
-				}
-			]
-		},
 		"comments": {
 			"patterns": [
 				{
-					"name": "comment.block.empty.dart",
-					"match": "/\\*\\*/",
-					"captures": {
-						"0": {
-							"name": "punctuation.definition.comment.dart"
-						}
+					"name": "comment.line.double-slash.lox",
+					"match": "\\/\\/.*"
+				}
+			]
+		},
+		"digits" : {
+			"patterns": [
+				{
+					"name": "constant.numeric.lox",
+					"match": "[0-9]+(?:.[0-9]+)?"
+				}
+			]
+		},
+		"punctuation": {
+			"patterns": [
+				{
+					"name": "punctuation.comma.lox",
+					"match": ","
+				},
+				{
+					"name": "punctuation.terminator.lox",
+					"match": ";"
+				},
+				{
+					"name": "punctuation.dot.lox",
+					"match": "\\."
+				}
+			]
+		},
+		"keywords": {
+				"patterns": [
+					{
+						"name": "constant.language.boolean.lox",
+						"match": "(true|false)"
+					},
+					{
+						"name": "support.function.lox",
+						"match": "(print)"
+					},
+					{
+						"name": "keyword.control.lox",
+						"match": "(if|else|while|for|return|and|or)"
+					},
+					{
+						"name": "variable.language.lox",
+						"match": "(this|super)"
+					},
+					{
+						"name": "constant.language.null.lox",
+						"match": "(nil)"
 					}
-				},
-				{
-					"include": "#comments-doc-oldschool"
-				},
-				{
-					"include": "#comments-doc"
-				},
-				{
-					"include": "#comments-inline"
-				}
-			]
-		},
-		"comments-doc-oldschool": {
-			"patterns": [
-				{
-					"name": "comment.block.documentation.dart",
-					"begin": "/\\*\\*",
-					"end": "\\*/",
-					"patterns": [
-						{
-							"include": "#comments-doc-oldschool"
-						},
-						{
-							"include": "#comments-block"
-						},
-						{
-							"include": "#dartdoc"
-						}
-					]
-				}
-			]
-		},
-		"comments-doc": {
-			"patterns": [
-				{
-					"name": "comment.block.documentation.dart",
-					"begin": "///",
-					"while": "^\\s*///",
-					"patterns": [
-						{
-							"include": "#dartdoc"
-						}
-					]
-				}
-			]
-		},
-		"comments-inline": {
-			"patterns": [
-				{
-					"include": "#comments-block"
-				},
-				{
-					"match": "((//).*)$",
-					"captures": {
-						"1": {
-							"name": "comment.line.double-slash.dart"
-						}
-					}
-				}
-			]
-		},
-		"comments-block": {
-			"patterns": [
-				{
-					"name": "comment.block.dart",
-					"begin": "/\\*",
-					"end": "\\*/",
-					"patterns": [
-						{
-							"include": "#comments-block"
-						}
-					]
-				}
-			]
-		},
-		"annotations": {
-			"patterns": [
-				{
-					"name": "storage.type.annotation.dart",
-					"match": "@[a-zA-Z]+"
-				}
-			]
+				]
 		},
 		"constants-and-special-vars": {
 			"patterns": [
@@ -230,90 +106,6 @@
 							"name": "entity.name.function.dart"
 						}
 					}
-				}
-			]
-		},
-		"keywords": {
-			"patterns": [
-				{
-					"name": "keyword.cast.dart",
-					"match": "(?<!\\$)\\bas\\b(?!\\$)"
-				},
-				{
-					"name": "keyword.control.catch-exception.dart",
-					"match": "(?<!\\$)\\b(try|on|catch|finally|throw|rethrow)\\b(?!\\$)"
-				},
-				{
-					"name": "keyword.control.dart",
-					"match": "(?<!\\$)\\b(break|case|continue|default|do|else|for|if|in|return|switch|while)\\b(?!\\$)"
-				},
-				{
-					"name": "keyword.control.dart",
-					"match": "(?<!\\$)\\b(sync(\\*)?|async(\\*)?|await|yield(\\*)?)\\b(?!\\$)"
-				},
-				{
-					"name": "keyword.control.dart",
-					"match": "(?<!\\$)\\bassert\\b(?!\\$)"
-				},
-				{
-					"name": "keyword.control.new.dart",
-					"match": "(?<!\\$)\\b(new)\\b(?!\\$)"
-				},
-				{
-					"name": "keyword.declaration.dart",
-					"match": "(?<!\\$)\\b(abstract|class|enum|extends|extension|external|factory|implements|get|mixin|native|operator|set|typedef|with|covariant)\\b(?!\\$)"
-				},
-				{
-					"name": "keyword.operator.dart",
-					"match": "(?<!\\$)\\b(is\\!?)\\b(?!\\$)"
-				},
-				{
-					"name": "keyword.operator.ternary.dart",
-					"match": "\\?|:"
-				},
-				{
-					"name": "keyword.operator.bitwise.dart",
-					"match": "(<<|>>>?|~|\\^|\\||&)"
-				},
-				{
-					"name": "keyword.operator.assignment.bitwise.dart",
-					"match": "((&|\\^|\\||<<|>>>?)=)"
-				},
-				{
-					"name": "keyword.operator.closure.dart",
-					"match": "(=>)"
-				},
-				{
-					"name": "keyword.operator.comparison.dart",
-					"match": "(==|!=|<=?|>=?)"
-				},
-				{
-					"name": "keyword.operator.assignment.arithmetic.dart",
-					"match": "(([+*/%-]|\\~)=)"
-				},
-				{
-					"name": "keyword.operator.assignment.dart",
-					"match": "(=)"
-				},
-				{
-					"name": "keyword.operator.increment-decrement.dart",
-					"match": "(\\-\\-|\\+\\+)"
-				},
-				{
-					"name": "keyword.operator.arithmetic.dart",
-					"match": "(\\-|\\+|\\*|\\/|\\~\\/|%)"
-				},
-				{
-					"name": "keyword.operator.logical.dart",
-					"match": "(!|&&|\\|\\|)"
-				},
-				{
-					"name": "storage.modifier.dart",
-					"match": "(?<!\\$)\\b(static|final|const|required|late)\\b(?!\\$)"
-				},
-				{
-					"name": "storage.type.primitive.dart",
-					"match": "(?<!\\$)\\b(?:void|var)\\b(?!\\$)"
 				}
 			]
 		},
@@ -432,22 +224,6 @@
 							"match": "\\n"
 						}
 					]
-				}
-			]
-		},
-		"punctuation": {
-			"patterns": [
-				{
-					"name": "punctuation.comma.dart",
-					"match": ","
-				},
-				{
-					"name": "punctuation.terminator.dart",
-					"match": ";"
-				},
-				{
-					"name": "punctuation.dot.dart",
-					"match": "\\."
 				}
 			]
 		}
